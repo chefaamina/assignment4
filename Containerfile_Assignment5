@@ -10,7 +10,7 @@ EXPOSE 80
 ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
 
 #mount data folder as volume in container /var/www/html/data
-RUN Docker volume create datavol 
+RUN docker volume create datavol 
 
-RUN Docker run --volume datavol --mount destination=/var/www/html/data
+RUN docker run -ti -v data.vol:/var/www/html/data --name mydata_container ubuntu ls -ld /var/www/html/data
 
