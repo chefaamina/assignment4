@@ -12,5 +12,5 @@ ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
 #mount data folder as volume in container /var/www/html/data
 RUN Docker volume create datavol 
 
-RUN Docker --volume datavol --mount source=/var/lib/docker/volumes/datavol, destination=/var/www/html/data
+RUN Docker run --volume datavol --mount destination=/var/www/html/data
 
