@@ -1,8 +1,16 @@
-#Containerfile for tuxpaint, vim and httpd
+#Containerfile_Assignment5
 FROM fedora:latest
-RUN yum -y install tuxpaint \
-&& yum -y install vim \
-&& yum -y install httpd
-COPY my-info.html /var/www/html/my-info.html
+#removed tuxpaint and vim
+RUN  yum -y install httpd
+
+COPY data/my-info.html /var/www/html/my-info.html
+
+#opening port 80 and running httpd
 EXPOSE 80
 ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
+
+#mount data folder as volume in container /var/www/html/data
+RUN Docker volume create datavol 
+
+RUN Docker --volume datavol --mount source=/var/lib/docker/volumes/datavol, destination=/var/www/html/data
+
