@@ -2,15 +2,8 @@
 FROM fedora:latest
 #removed tuxpaint and vim
 RUN  yum -y install httpd
-
-COPY data/my-info.html /var/www/html/my-info.html
-
+#create volume "data"
+VOLUME data
 #opening port 80 and running httpd
 EXPOSE 80
 ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
-
-#mount data folder as volume in container /var/www/html/data
-RUN docker volume create datavol 
-
-RUN docker run -ti -v data.vol:/var/www/html/data --name mydata_container ubuntu ls -ld /var/www/html/data
-
