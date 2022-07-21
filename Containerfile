@@ -1,6 +1,8 @@
-#Containerfile for multi-stage
+#Containerfile for tuxpaint, vim and httpd
 FROM fedora:latest
-#build image1 using myfile1.txt
-
-FROM ubuntu
-#build image2 using myfile2.txt
+RUN yum -y install tuxpaint \
+&& yum -y install vim \
+&& yum -y install httpd
+COPY my-info.html /var/www/html/my-info.html
+EXPOSE 80
+ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
