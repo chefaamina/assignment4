@@ -4,6 +4,8 @@ FROM fedora:latest
 RUN  yum -y install httpd
 #create volume "data"
 VOLUME data
+#mount volume
+RUN --mount=source=data,target=/var/www/html/data,id=my_data_container fedora ls -ld /var/www/html/data
 #opening port 80 and running httpd
 EXPOSE 80
 ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
